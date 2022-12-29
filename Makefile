@@ -6,7 +6,7 @@
 #    By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 04:53:24 by letnitan          #+#    #+#              #
-#    Updated: 2022/12/29 06:06:42 by letnitan         ###   ########.fr        #
+#    Updated: 2022/12/29 10:50:42 by letnitan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,6 @@ fclean : clean
 		
 re : fclean all
 
-.PHONY : all clean fclean re
-
 %.o: %.c
 	$(CC) ${FLAGS} -o $@ -c $<
 # $@ : produit (ou but) de la règle
@@ -54,3 +52,5 @@ re : fclean all
 # du fichier .c correspondant et que la commande $(CC) -o $@ -c $< permet de créer le fichier objet 
 # à partir du fichier source. Les variables automatiques permettent de retrouver le 
 # nom du fichier concerné par la règle.
+
+.PHONY : all clean fclean re

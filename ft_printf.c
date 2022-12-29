@@ -6,75 +6,77 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:36:23 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/29 10:15:10 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/29 10:43:22 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_printf.h"
 
 // C'EST UN BROUILLON
 
-void	ft_putstr(char	*str)
+int	ft_putstr(char	*str)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-	{
+	while (str[i++])
 		write(1, &str[i], 1);
-		i++;
-	}
+	return(i + 1);
 }
 
-void	ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	write(1, &c, 1);
+	return (1);
 }
 
-void	ft_putnbr(int nb)
+int	ft_putnbr(int nb)
 {
 	unsigned int	n;
+	int	counter;
 
 	n = nb;
+	counter = 0;
 	if (nb < 0)
 	{
 		ft_putchar('-');
 		n *= -1;
+		counter++;
 	}
 	if (n < 10)
-		ft_putchar(n + '0');
+		counter += ft_putchar(n + '0');
 	else
 	{
 		ft_putnbr(n / 10);
 		ft_putnbr(n % 10);
 	}
+	return(counter);
 }
 
-int	checkflag(va_list mandatory_argument, char c)
+int	checkflag(va_list args, const char c)
 {
-	int	counter;
+	int	print_counter;
 
-	counter = 0;
-	if mandatory_argument[i+1] == 'c'
-		// counter =; putchar avec option compteur
-	if mandatory_argument[i+1] == 's'
-		// counter =; putstr avec compteur
-	if mandatory_argument[i+1] == 'p'
-		// counter =; putpointeur ?
-	if mandatory_argument[i+1] == 'd'
-		// counter =; putnbr
-	if mandatory_argument[i+1] == 'i'
-		// counter =; putnbr
-	if mandatory_argument[i+1] == 'u'
-		// counter =; putnbr unsigned
-	if mandatory_argument[i+1] == 'x'
-		// counter =; puthex
-	if mandatory_argument[i+1] == 'X'
-		// counter =;putHEX
-	if mandatory_argument[i+1] == '%'
-		// counter =; putpercentage
-	return (counter);
+	print_counter = 0;
+	if (c == 'c')
+		print_counter += ft_putchar(va_arg(args, int));
+	// else if (c == 's')
+	// 	// counter =; putstr avec compteur
+	// else if (c == 'p')
+	// 	// counter =; putpointeur ?
+	// else if (c == 'd')
+	// 	// counter =; putnbr
+	// else if (c == 'i')
+	// 	// counter =; putnbr
+	// else if (c == 'u')
+	// 	// counter =; putnbr unsigned
+	// else if (c == 'x')
+	// 	// counter =; puthex
+	// else if (c == 'X')
+	// 	// counter =;putHEX
+	// else if (c == '%')
+	// 	// counter =; putpercentage
+	return (print_counter);
 }
 
 int	ft_printf(const char *mandatory_argument, ...)
@@ -95,15 +97,21 @@ int	ft_printf(const char *mandatory_argument, ...)
 		}
 		else
 		{
-			// counter = counter + putchar 
-			i++;
+			counter += ft_putchar(mandatory_argument[i]);
 		}
+		i++;
 	}
-	va_end(args)
+	va_end(args);
 	return (counter);
 }
 
 int	main()
 {
-	ft_printf("number %i %i hello", 42, 53);
+	char	c;
+
+	c = 'H';
+	printf("The test will begin :\n");
+	ft_printf("Character \"%c\" hello", c);
+	printf("\nThe expected character was : \"H\"");
+	printf("\nDone.");
 }
