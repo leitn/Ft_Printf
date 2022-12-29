@@ -6,7 +6,7 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:36:23 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/29 10:43:22 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:23:39 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ int	ft_putstr(char	*str)
 	int	i;
 
 	i = 0;
-	while (str[i++])
-		write(1, &str[i], 1);
-	return(i + 1);
+	while (str[i])
+		{
+			write(1, &str[i], 1);
+			i++;
+		}
+	return(i);
 }
 
 int	ft_putchar(char c)
@@ -41,10 +44,12 @@ int	ft_putnbr(int nb)
 	{
 		ft_putchar('-');
 		n *= -1;
-		counter++;
+		counter = 1;
 	}
 	if (n < 10)
+	{
 		counter += ft_putchar(n + '0');
+	}
 	else
 	{
 		ft_putnbr(n / 10);
@@ -60,12 +65,12 @@ int	checkflag(va_list args, const char c)
 	print_counter = 0;
 	if (c == 'c')
 		print_counter += ft_putchar(va_arg(args, int));
-	// else if (c == 's')
-	// 	// counter =; putstr avec compteur
+	else if (c == 's')
+		print_counter = ft_putstr(va_arg(args, char*));
 	// else if (c == 'p')
 	// 	// counter =; putpointeur ?
-	// else if (c == 'd')
-	// 	// counter =; putnbr
+	else if (c == 'd')
+		print_counter = ft_putnbr(va_arg(args, int));
 	// else if (c == 'i')
 	// 	// counter =; putnbr
 	// else if (c == 'u')
@@ -74,8 +79,8 @@ int	checkflag(va_list args, const char c)
 	// 	// counter =; puthex
 	// else if (c == 'X')
 	// 	// counter =;putHEX
-	// else if (c == '%')
-	// 	// counter =; putpercentage
+	else if (c == '%')
+		print_counter = ft_putchar('%');
 	return (print_counter);
 }
 
@@ -102,16 +107,17 @@ int	ft_printf(const char *mandatory_argument, ...)
 		i++;
 	}
 	va_end(args);
+	printf("\nCounter : %i\n", counter);
 	return (counter);
 }
 
 int	main()
 {
-	char	c;
+	int	n;
 
-	c = 'H';
-	printf("The test will begin :\n");
-	ft_printf("Character \"%c\" hello", c);
-	printf("\nThe expected character was : \"H\"");
+	n = 4588;
+	printf("The test will begin :\n\n");
+	ft_printf("Number : %d", n);
+	printf("\nThe expected print was : \"45\"");
 	printf("\nDone.");
 }
