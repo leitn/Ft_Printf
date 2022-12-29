@@ -6,7 +6,7 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:36:23 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/29 11:23:39 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:49:29 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_putchar(char c)
 	return (1);
 }
 
-int	ft_putnbr(int nb)
+int	putnbr_counter(int nb)
 {
 	unsigned int	n;
 	int	counter;
@@ -42,20 +42,35 @@ int	ft_putnbr(int nb)
 	counter = 0;
 	if (nb < 0)
 	{
-		ft_putchar('-');
 		n *= -1;
 		counter = 1;
 	}
-	if (n < 10)
+	while(n > 0)
 	{
-		counter += ft_putchar(n + '0');
+		n = n/10;
+		counter++;
 	}
+	return(counter);
+}
+
+int	ft_putnbr(int nb)
+{
+	unsigned int	n;
+
+	n = nb;
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		n *= -1;
+	}
+	if (n < 10)
+		ft_putchar(n + '0');
 	else
 	{
 		ft_putnbr(n / 10);
 		ft_putnbr(n % 10);
 	}
-	return(counter);
+	return(putnbr_counter(nb));
 }
 
 int	checkflag(va_list args, const char c)
@@ -115,9 +130,9 @@ int	main()
 {
 	int	n;
 
-	n = 4588;
+	n = 45885;
 	printf("The test will begin :\n\n");
 	ft_printf("Number : %d", n);
-	printf("\nThe expected print was : \"45\"");
+	printf("\nThe expected print was : \"45885\"");
 	printf("\nDone.");
 }
