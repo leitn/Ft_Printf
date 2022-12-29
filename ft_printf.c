@@ -6,7 +6,7 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:36:23 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/29 22:25:50 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/29 23:19:26 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,21 @@ int	ft_putchar(char c)
 	return (1);
 }
 
-int	putnbr_counter(long long nb)
+int	ft_nbrcounter(long long nb, int base_len)
 {
 	int	counter;
 
 	counter = 0;
-	if (nb < 0)
+	if (nb == 0)
+		return (1);
+	else if (nb < 0)
 	{
 		nb *= -1;
 		counter++;
 	}
 	while(nb > 0)
 	{
-		nb = nb/10;
+		nb = nb/base_len;
 		counter++;
 	}
 	return(counter);
@@ -78,7 +80,7 @@ int	ft_putnbr(long long n, char *base, int	trigger)
 	if (nbr > base_len - 1)
 		ft_putnbr(nbr / base_len, base, 0);
 	ft_putchar(base[nbr % base_len]);
-	return(putnbr_counter(n));
+	return(ft_nbrcounter(n, base_len));
 }
 
 int	checkflag(va_list args, const char c)
@@ -134,22 +136,24 @@ int	ft_printf(const char *mandatory_argument, ...)
 	return (counter);
 }
 
-int	main()
-{
-	long long	n;
-	int i;
+//-----------------------------------------TEST HEXA----------------------------------------
+// int	main()
+// {
+// 	long long	n;
+// 	int i;
 
-	n = -4294967295895;
-	i = 5879;
-	printf("The test will begin :\n\n");
-	ft_printf("I. Number : %d\n", n);
-	ft_printf("\nII. Number : %d\n", i);
-	printf("\n\n-------------------------------");
-	printf("\n\nI. The expected print was : \"-4294967295895\"\nThe counter should print %li.", ft_strlen("I. Number : -4294967295895\n"));
-	printf("\n\nII. The expected print was : \"5879\"\nThe counter should print %li.", ft_strlen("\nII> Number : 5879\n"));
-	printf("\n\nDone.");
-}
+// 	n = 31;
+// 	i = 15;
+// 	printf("The test will begin :\n\n");
+// 	ft_printf("I. Number : %X\n", n);
+// 	ft_printf("\nII. Number : %X\n", i);
+// 	printf("\n\n-------------------------------");
+// 	printf("\n\nI. The expected print was : \"1F\"\nThe counter should print %li.", ft_strlen("I. Number : 1F\n"));
+// 	printf("\n\nII. The expected print was : \"F\"\nThe counter should print %li.", ft_strlen("\nII. Number : F\n"));
+// 	printf("\n\nDone.");
+// }
 
+//-------------------------------------TEST GRANDS CHIFFRES--------------------------------------
 // int	main()
 // {
 // 	long long	n;
@@ -165,3 +169,19 @@ int	main()
 // 	printf("\n\nII. The expected print was : \"5879\"\nThe counter should print %li.", ft_strlen("\nII> Number : 5879\n"));
 // 	printf("\n\nDone.");
 // }
+
+int	main()
+{
+	long long	n;
+	int i;
+
+	n = -4294967295895;
+	i = 5879;
+	printf("The test will begin :\n\n");
+	ft_printf("I. Number : %d\n", n);
+	ft_printf("\nII. Number : %d\n", i);
+	printf("\n\n-------------------------------");
+	printf("\n\nI. The expected print was : \"-4294967295895\"\nThe counter should print %li.", ft_strlen("I. Number : -4294967295895\n"));
+	printf("\n\nII. The expected print was : \"5879\"\nThe counter should print %li.", ft_strlen("\nII> Number : 5879\n"));
+	printf("\n\nDone.");
+}
