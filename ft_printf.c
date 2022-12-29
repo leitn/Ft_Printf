@@ -6,15 +6,12 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:36:23 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/19 22:37:19 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/29 09:07:51 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
+
+#include "ft_printf.h"
 
 // C'EST UN BROUILLON
 
@@ -81,17 +78,9 @@ char	checkflag(mandatory_argument, i)
 int	ft_printf(const char *mandatory_argument, ...)
 {
 	va_list	args;
-	va_start (args, mandatory_argument);
-	while(mandatory_argument[i] != '\0')
-	{
-		if (mandatory_argument[i] == '%' && mandatory_argument[i + 1] != '\0')
-		{
-			variable_flag  = check_flag(mandatory_argument, i);
-			
-		}
-		i++;
-	}
+	va_start(args, mandatory_argument);
 	
+	va_end(args)
 	return 0;
 }
 
