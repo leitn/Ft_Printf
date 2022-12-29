@@ -6,7 +6,7 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:36:23 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/29 09:07:51 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/29 10:15:10 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,37 +51,56 @@ void	ft_putnbr(int nb)
 	}
 }
 
-char	checkflag(mandatory_argument, i)
+int	checkflag(va_list mandatory_argument, char c)
 {
+	int	counter;
+
+	counter = 0;
 	if mandatory_argument[i+1] == 'c'
-		return ('c');
+		// counter =; putchar avec option compteur
 	if mandatory_argument[i+1] == 's'
-		return ('s');
+		// counter =; putstr avec compteur
 	if mandatory_argument[i+1] == 'p'
-		return ('p');
+		// counter =; putpointeur ?
 	if mandatory_argument[i+1] == 'd'
-		return ('d');
+		// counter =; putnbr
 	if mandatory_argument[i+1] == 'i'
-		return ('i');
+		// counter =; putnbr
 	if mandatory_argument[i+1] == 'u'
-		return ('u');
+		// counter =; putnbr unsigned
 	if mandatory_argument[i+1] == 'x'
-		return ('x');
+		// counter =; puthex
 	if mandatory_argument[i+1] == 'X'
-		return ('X');
+		// counter =;putHEX
 	if mandatory_argument[i+1] == '%'
-		return ('%');
-	else
-		return (0);
+		// counter =; putpercentage
+	return (counter);
 }
 
 int	ft_printf(const char *mandatory_argument, ...)
 {
 	va_list	args;
+	int	counter;
+	int	i;
 	va_start(args, mandatory_argument);
 	
+	counter = 0;
+	i = 0;
+	while (mandatory_argument[i])
+	{
+		if(mandatory_argument[i] == '%')
+		{
+			counter = counter + checkflag(args, mandatory_argument[i + 1]);
+			i++;
+		}
+		else
+		{
+			// counter = counter + putchar 
+			i++;
+		}
+	}
 	va_end(args)
-	return 0;
+	return (counter);
 }
 
 int	main()
