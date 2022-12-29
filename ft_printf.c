@@ -6,7 +6,7 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 14:36:23 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/29 18:49:29 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/29 22:25:50 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,50 +27,58 @@ int	ft_putstr(char	*str)
 	return(i);
 }
 
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
 int	ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-int	putnbr_counter(int nb)
+int	putnbr_counter(long long nb)
 {
-	unsigned int	n;
 	int	counter;
 
-	n = nb;
 	counter = 0;
 	if (nb < 0)
 	{
-		n *= -1;
-		counter = 1;
+		nb *= -1;
+		counter++;
 	}
-	while(n > 0)
+	while(nb > 0)
 	{
-		n = n/10;
+		nb = nb/10;
 		counter++;
 	}
 	return(counter);
 }
 
-int	ft_putnbr(int nb)
+int	ft_putnbr(long long n, char *base, int	trigger)
 {
-	unsigned int	n;
+	unsigned long long	nbr;
+	size_t				base_len;
 
-	n = nb;
-	if (nb < 0)
+	base_len = ft_strlen(base);
+	nbr = n;
+	if (n < 0 && trigger == 1)
 	{
+		nbr = n * -1;
 		ft_putchar('-');
-		n *= -1;
 	}
-	if (n < 10)
-		ft_putchar(n + '0');
-	else
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
-	}
-	return(putnbr_counter(nb));
+	if (nbr > base_len - 1)
+		ft_putnbr(nbr / base_len, base, 0);
+	ft_putchar(base[nbr % base_len]);
+	return(putnbr_counter(n));
 }
 
 int	checkflag(va_list args, const char c)
@@ -85,15 +93,15 @@ int	checkflag(va_list args, const char c)
 	// else if (c == 'p')
 	// 	// counter =; putpointeur ?
 	else if (c == 'd')
-		print_counter = ft_putnbr(va_arg(args, int));
-	// else if (c == 'i')
-	// 	// counter =; putnbr
-	// else if (c == 'u')
-	// 	// counter =; putnbr unsigned
-	// else if (c == 'x')
-	// 	// counter =; puthex
-	// else if (c == 'X')
-	// 	// counter =;putHEX
+		print_counter = ft_putnbr(va_arg(args, long long), "0123456789", 1);
+	else if (c == 'i')
+		print_counter = ft_putnbr(va_arg(args, int), "0123456789", 1);
+	else if (c == 'u')
+		print_counter = ft_putnbr(va_arg(args, int), "0123456789", 0);
+	else if (c == 'x')
+		print_counter = ft_putnbr(va_arg(args, int), "0123456789abcdef", 1);
+	else if (c == 'X')
+		print_counter = ft_putnbr(va_arg(args, int), "0123456789ABCDEF", 1);
 	else if (c == '%')
 		print_counter = ft_putchar('%');
 	return (print_counter);
@@ -128,11 +136,32 @@ int	ft_printf(const char *mandatory_argument, ...)
 
 int	main()
 {
-	int	n;
+	long long	n;
+	int i;
 
-	n = 45885;
+	n = -4294967295895;
+	i = 5879;
 	printf("The test will begin :\n\n");
-	ft_printf("Number : %d", n);
-	printf("\nThe expected print was : \"45885\"");
-	printf("\nDone.");
+	ft_printf("I. Number : %d\n", n);
+	ft_printf("\nII. Number : %d\n", i);
+	printf("\n\n-------------------------------");
+	printf("\n\nI. The expected print was : \"-4294967295895\"\nThe counter should print %li.", ft_strlen("I. Number : -4294967295895\n"));
+	printf("\n\nII. The expected print was : \"5879\"\nThe counter should print %li.", ft_strlen("\nII> Number : 5879\n"));
+	printf("\n\nDone.");
 }
+
+// int	main()
+// {
+// 	long long	n;
+// 	int i;
+
+// 	n = -4294967295895;
+// 	i = 5879;
+// 	printf("The test will begin :\n\n");
+// 	ft_printf("I. Number : %d\n", n);
+// 	ft_printf("\nII. Number : %d\n", i);
+// 	printf("\n\n-------------------------------");
+// 	printf("\n\nI. The expected print was : \"-4294967295895\"\nThe counter should print %li.", ft_strlen("I. Number : -4294967295895\n"));
+// 	printf("\n\nII. The expected print was : \"5879\"\nThe counter should print %li.", ft_strlen("\nII> Number : 5879\n"));
+// 	printf("\n\nDone.");
+// }

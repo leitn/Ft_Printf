@@ -6,7 +6,7 @@
 #    By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 04:53:24 by letnitan          #+#    #+#              #
-#    Updated: 2022/12/29 10:50:42 by letnitan         ###   ########.fr        #
+#    Updated: 2022/12/29 20:42:34 by letnitan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ ${NAME} : ${OBJS}
 # it means : libftprint.a est cree a partir d'OBJS, et voila avec quelle commande : ar rc NAME OBJS. 
 # The ar command combines one or more named files into a single archive file written in ar archive format.
 #c : Create the archive. The specified archive is always created if it did not exist, when you request an update. But a warning is issued unless you specify in advance that you expect to create it, by using this modifier.
-# r : Insert the files member... into archive (with replacement). This operation differs from q in that any previously existing members are deleted if their names match those being added.
-# s : Write an object-file index into the archive, or update an existing one, even if no other change is made to the archive. You may use this modifier flag either with any operation, or alone. Running "ar s" on an archive is equivalent to running ranlib on it.
+# r : Replace. Insert the files member... into archive (with replacement). This operation differs from q in that any previously existing members are deleted if their names match those being added.
+# s : Sort. Write an object-file index into the archive, or update an existing one, even if no other change is made to the archive. You may use this modifier flag either with any operation, or alone. Running "ar s" on an archive is equivalent to running ranlib on it.
 
 all: ${NAME}
 
