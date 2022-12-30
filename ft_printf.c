@@ -48,11 +48,11 @@ int	checkflag(va_list args, const char c)
 	else if ((c == 'd') || (c == 'i'))
 		return(ft_putnbr((long long)va_arg(args, int), "0123456789", 1));
 	else if (c == 'u')
-		return(ft_putnbr(va_arg(args, int), "0123456789", 0));
+		return(ft_putnbr(va_arg(args, unsigned int), "0123456789", 0));
 	else if (c == 'x')
-		return(ft_putnbr(va_arg(args, int), "0123456789abcdef", 1));
+		return(ft_putnbr(va_arg(args, unsigned int), "0123456789abcdef", 1));
 	else if (c == 'X')
-		return(ft_putnbr(va_arg(args, int), "0123456789ABCDEF", 1));
+		return(ft_putnbr(va_arg(args, unsigned int), "0123456789ABCDEF", 1));
 	else if (c == '%')
 		return(ft_putchar('%'));
 	return (0);
