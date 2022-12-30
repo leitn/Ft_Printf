@@ -6,7 +6,7 @@
 #    By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 04:53:24 by letnitan          #+#    #+#              #
-#    Updated: 2022/12/29 20:42:34 by letnitan         ###   ########.fr        #
+#    Updated: 2022/12/30 10:08:16 by letnitan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror 
 
-SRCS = ft_printf.c
+SRCS = ft_printf.c ft_utils.c	\
 
 # nommage automatique des fichiers objets d'apres les noms des sources C
 OBJS = ${SRCS:.c=.o}
@@ -25,7 +25,7 @@ OBJS = ${SRCS:.c=.o}
 # ----------------
 
 ${NAME} : ${OBJS}
-		ar rcs ${NAME} ${OBJS}
+		ar rcs $@ $^
 		@echo "ft_printf compiled!"
 # it means : libftprint.a est cree a partir d'OBJS, et voila avec quelle commande : ar rc NAME OBJS. 
 # The ar command combines one or more named files into a single archive file written in ar archive format.
