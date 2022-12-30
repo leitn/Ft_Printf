@@ -6,7 +6,7 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 09:53:31 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/30 10:03:55 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/30 11:26:36 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ int	ft_putstr(char	*str)
 {
 	int	i;
 
+	if (str == NULL)
+		return (write(1, "(null)", 6));
 	i = 0;
 	while (str[i])
 		{
-			write(1, &str[i], 1);
+			ft_putchar(str[i]);
 			i++;
 		}
 	return(i);
