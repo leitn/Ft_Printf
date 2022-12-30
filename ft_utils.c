@@ -6,7 +6,7 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 09:55:34 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/30 10:09:49 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:09:07 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ int	ft_nbrcounter(long long nb, int base_len)
 		nb *= -1;
 		counter++;
 	}
-	while(nb > 0)
+	while (nb > 0)
 	{
-		nb = nb/base_len;
+		nb = nb / base_len;
 		counter++;
 	}
-	return(counter);
+	return (counter);
 }
 
-int	ft_putnbr(long long n, char *base, int	trigger)
+int	ft_putnbr(long long n, char *base, int trigger)
 {
 	unsigned long long	nbr;
 	size_t				base_len;
@@ -53,7 +53,7 @@ int	ft_putnbr(long long n, char *base, int	trigger)
 	if (nbr > base_len - 1)
 		ft_putnbr(nbr / base_len, base, 0);
 	ft_putchar(base[nbr % base_len]);
-	return(ft_nbrcounter(n, base_len));
+	return (ft_nbrcounter(n, base_len));
 }
 
 int	ft_ptrlen(unsigned long long n, int base_len)
