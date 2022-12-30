@@ -6,7 +6,7 @@
 /*   By: letnitan <letnitan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 09:53:31 by letnitan          #+#    #+#             */
-/*   Updated: 2022/12/30 12:06:48 by letnitan         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:28:26 by letnitan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ int	checkflag(va_list args, const char c)
 		return (ft_putnbr(va_arg(args, unsigned int), "0123456789ABCDEF", 1));
 	else if (c == '%')
 		return (ft_putchar('%'));
+	else
+	{
+		ft_putchar('%');
+		return (ft_putchar(c) + 1);
+	}
 	return (0);
 }
 
